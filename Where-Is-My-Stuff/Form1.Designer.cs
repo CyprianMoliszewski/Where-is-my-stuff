@@ -1,4 +1,4 @@
-﻿namespace Application
+﻿namespace Where_Is_My_Stuff
 {
     partial class Form1
     {
