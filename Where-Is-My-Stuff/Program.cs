@@ -18,12 +18,14 @@ namespace Where_Is_My_Stuff
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-
             //DATABASE INIT
             DatabaseHandler dbHandler = new DatabaseHandler(new DatabaseInit().GetConn());
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainWindow());
+
+            
         }
     }
 }

@@ -19,6 +19,9 @@ namespace Where_Is_My_Stuff.Database
         private static readonly string _sqlSchemaName = "schema.sql";
         private static readonly string _sqlSchemaPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database", _sqlSchemaName);
 
+        private static readonly string _sqlSeedName = "seed.sql";
+        private static readonly string _sqlSeedPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database", _sqlSeedName);
+
         private static readonly string _connStringMaster = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True";
         private static readonly string _connStringWims = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={_databasePath};Integrated Security=True;Connect Timeout=30";
         
@@ -29,7 +32,8 @@ namespace Where_Is_My_Stuff.Database
                 if (!CheckIfDataBaseExist())
                 {
                     CreateDatabaseFile();
-                    ExecuteDatabaseSchema();
+                    ExecuteSqlFile(_sqlSchemaPath, _connStringWims); //SCHEMA FILE
+                    ExecuteSqlFile(_sqlSeedPath, _connStringWims); //SEED FILE - COMMENT THIS LINE IF YOU WANT EMPTY DATABASE
                 }
             }
             catch (Exception e)
@@ -78,6 +82,7 @@ namespace Where_Is_My_Stuff.Database
                         detachCmd.ExecuteNonQuery();
                     }
                 }
+                Debug.WriteLine("Database created!");
             }
             catch (Exception e)
             {
@@ -85,21 +90,21 @@ namespace Where_Is_My_Stuff.Database
             }
 
         }
-        private void ExecuteDatabaseSchema()
+        private void ExecuteSqlFile(string sqlFilePath, string connString)
         {
             try
             {
                 //SLICING THE FILE INFO SINGULAR COMMANDS, EXECUTENONQUERY CANT HANDLE WHOLE FILE WITH GO STATEMANT
-                IEnumerable <string> sqlSchemaFile = File.ReadLines(_sqlSchemaPath);
+                IEnumerable<string> sqlFile = File.ReadLines(sqlFilePath);
 
                 List<string> singleCommands = new List<string>();
                 string comandText = "";
 
-                foreach (string line in sqlSchemaFile)
+                foreach (string line in sqlFile)
                 {
                     if (line.Trim().ToUpper() != "GO")
                     {
-                    comandText += line+"\n";
+                        comandText += line + "\n";
                     }
                     else
                     {
@@ -109,17 +114,18 @@ namespace Where_Is_My_Stuff.Database
                 }
 
                 //EXECUTING SINGULAR COMMANDS
-                using (SqlConnection connWims = new SqlConnection(_connStringWims))
+                using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    connWims.Open();
-                    foreach(string command in singleCommands)
+                    conn.Open();
+                    foreach (string command in singleCommands)
                     {
-                        using (SqlCommand cmd = new SqlCommand(command, connWims))
+                        using (SqlCommand cmd = new SqlCommand(command, conn))
                         {
                             cmd.ExecuteNonQuery();
                         }
                     }
                 }
+                Debug.WriteLine("File: " + sqlFilePath + "\nExecuted succesfully");
             }
             catch (Exception e)
             {

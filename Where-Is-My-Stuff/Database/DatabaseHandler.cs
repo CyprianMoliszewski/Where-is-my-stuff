@@ -13,5 +13,16 @@ namespace Where_Is_My_Stuff.Database
         {
             _conn = conn;
         }
+
+        ///
+        /// TREE VIEW
+        ///
+
+        //GET ALL ROOT+
+        //GET ALL NODES FOR ROOT
+
+        ///
+        /// 
+        ///
     }
 }
