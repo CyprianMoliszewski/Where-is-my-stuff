@@ -41,7 +41,6 @@ namespace Where_Is_My_Stuff.Database
                 Debug.WriteLine(e);
             } 
         }
-
         public string GetConn()
         {
             return _connStringWims;
@@ -58,7 +57,6 @@ namespace Where_Is_My_Stuff.Database
             }
             return false;
         }
-
         private void CreateDatabaseFile()
         {
             //CREATING EMPTY DATABASE FILE

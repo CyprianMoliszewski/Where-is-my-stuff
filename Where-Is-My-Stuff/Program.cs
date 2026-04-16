@@ -7,6 +7,8 @@ using System.IO;
 using System.Windows.Forms;
 
 using Where_Is_My_Stuff.Database;
+using System.Data.Common;
+using Where_Is_My_Stuff.Services;
 
 namespace Where_Is_My_Stuff
 {
@@ -19,7 +21,8 @@ namespace Where_Is_My_Stuff
         static void Main()
         {
             //DATABASE INIT
-            DatabaseHandler dbHandler = new DatabaseHandler(new DatabaseInit().GetConn());
+            DatabaseHandler dbHandler = DatabaseHandler.Instance;
+            dbHandler.SetConnection(new DatabaseInit().GetConn());
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

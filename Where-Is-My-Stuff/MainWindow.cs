@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Where_Is_My_Stuff.Database;
+using Where_Is_My_Stuff.Services;
 
 namespace Where_Is_My_Stuff
 {
@@ -19,8 +21,13 @@ namespace Where_Is_My_Stuff
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-
+            DatabaseHandler dh = DatabaseHandler.Instance;
+            TreeViewService treeViewService = new TreeViewService();
+            treeViewService.PopulateTree(tree_left);
+            tree_left.ExpandAll();
         }
+
+
         private void btn_mainView_Click(object sender, EventArgs e)
         {
             tbc_mainWindow.SelectedIndex = 0;

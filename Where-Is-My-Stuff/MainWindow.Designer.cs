@@ -37,21 +37,21 @@
             this.btn_settingsView = new System.Windows.Forms.Button();
             this.tbc_mainWindow = new System.Windows.Forms.TabControl();
             this.tab_treeView = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tree_left = new System.Windows.Forms.TreeView();
+            this.tree_right = new System.Windows.Forms.TreeView();
             this.tab_filter = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tab_logs = new System.Windows.Forms.TabPage();
             this.tab_archive = new System.Windows.Forms.TabPage();
             this.btn_mainView = new System.Windows.Forms.Button();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.treeView2 = new System.Windows.Forms.TreeView();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tbc_mainWindow.SuspendLayout();
             this.tab_treeView.SuspendLayout();
-            this.tab_filter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tab_filter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -144,6 +144,38 @@
             this.tab_treeView.Text = "tab_treeView";
             this.tab_treeView.UseVisualStyleBackColor = true;
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.tree_left);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.tree_right);
+            this.splitContainer1.Size = new System.Drawing.Size(744, 390);
+            this.splitContainer1.SplitterDistance = 371;
+            this.splitContainer1.TabIndex = 0;
+            // 
+            // tree_left
+            // 
+            this.tree_left.Location = new System.Drawing.Point(24, 69);
+            this.tree_left.Name = "tree_left";
+            this.tree_left.Size = new System.Drawing.Size(324, 294);
+            this.tree_left.TabIndex = 0;
+            // 
+            // tree_right
+            // 
+            this.tree_right.Location = new System.Drawing.Point(97, 107);
+            this.tree_right.Name = "tree_right";
+            this.tree_right.Size = new System.Drawing.Size(121, 97);
+            this.tree_right.TabIndex = 0;
+            // 
             // tab_filter
             // 
             this.tab_filter.Controls.Add(this.dataGridView1);
@@ -153,6 +185,16 @@
             this.tab_filter.TabIndex = 3;
             this.tab_filter.Text = "tab_filter";
             this.tab_filter.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(269, 167);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.TabIndex = 0;
             // 
             // tab_logs
             // 
@@ -183,48 +225,6 @@
             this.btn_mainView.UseVisualStyleBackColor = true;
             this.btn_mainView.Click += new System.EventHandler(this.btn_mainView_Click);
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.treeView1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.treeView2);
-            this.splitContainer1.Size = new System.Drawing.Size(744, 390);
-            this.splitContainer1.SplitterDistance = 371;
-            this.splitContainer1.TabIndex = 0;
-            // 
-            // treeView1
-            // 
-            this.treeView1.Location = new System.Drawing.Point(24, 69);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(121, 97);
-            this.treeView1.TabIndex = 0;
-            // 
-            // treeView2
-            // 
-            this.treeView2.Location = new System.Drawing.Point(97, 107);
-            this.treeView2.Name = "treeView2";
-            this.treeView2.Size = new System.Drawing.Size(121, 97);
-            this.treeView2.TabIndex = 0;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(269, 167);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 0;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -246,11 +246,11 @@
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.tbc_mainWindow.ResumeLayout(false);
             this.tab_treeView.ResumeLayout(false);
-            this.tab_filter.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tab_filter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -273,8 +273,8 @@
         private System.Windows.Forms.TabPage tab_archive;
         private System.Windows.Forms.Button btn_mainView;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.TreeView treeView2;
+        private System.Windows.Forms.TreeView tree_left;
+        private System.Windows.Forms.TreeView tree_right;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
