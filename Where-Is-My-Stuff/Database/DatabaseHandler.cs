@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using Where_Is_My_Stuff.Services;
 
@@ -131,6 +132,38 @@ namespace Where_Is_My_Stuff.Database
 
         //GET ALL ROOT+
         //GET ALL NODES FOR ROOT
+
+        ///
+        /// 
+        ///
+
+        ///
+        /// COMBOBOX
+        ///
+        
+        public List<string> GetValueForCombobox(string table_name, string field_name)
+        {
+            List<string> value = new List<string>();
+
+            string command = $"SELECT * FROM {table_name}";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                SqlCommand cmd = new SqlCommand(command, conn);
+                conn.Open();
+               
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        
+                        string name = reader.GetString(reader.GetOrdinal(field_name));                       
+                        value.Add(name);
+                    }
+                }
+            }
+            return value;
+        }
 
         ///
         /// 

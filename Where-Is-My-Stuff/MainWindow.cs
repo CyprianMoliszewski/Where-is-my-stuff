@@ -24,7 +24,9 @@ namespace Where_Is_My_Stuff
             DatabaseHandler dh = DatabaseHandler.Instance;
             TreeViewService treeViewService = new TreeViewService();
             treeViewService.PopulateTree(tree_left);
-            tree_left.ExpandAll();
+            tree_left.ExpandAll();           
+            cb_categories.Items.AddRange(dh.GetValueForCombobox("tbl_categories", "category_name").ToArray());
+            cb_owners.Items.AddRange(dh.GetValueForCombobox("tbl_owners", "owner_name").ToArray());
         }
 
 

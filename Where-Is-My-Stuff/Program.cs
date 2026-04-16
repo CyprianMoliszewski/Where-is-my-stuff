@@ -23,7 +23,6 @@ namespace Where_Is_My_Stuff
             //DATABASE INIT
             DatabaseHandler dbHandler = DatabaseHandler.Instance;
             dbHandler.SetConnection(new DatabaseInit().GetConn());
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainWindow());
