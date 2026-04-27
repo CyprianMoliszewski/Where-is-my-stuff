@@ -524,36 +524,5 @@ namespace Where_Is_My_Stuff.Database
         ///
         /// 
         ///
-
-        ///
-        ///    GET ITEMS DETAILS
-        ///
-        public DataTable GetItemsDetails(int item_id)
-        {
-            DataTable dt = new DataTable();
-            string command = "SELECT i.item_id, i.item_name, i.item_description, i.create_date, i.update_date, " + 
-                             "c.category_name, o.owner_name, l.location_name " +
-                             "FROM tbl_items as i " +
-                             "INNER JOIN tbl_categories as c ON i.category_id = c.category_id " +
-                             "INNER JOIN tbl_owners as o ON i.owner_id = o.owner_id " +
-                             "INNER JOIN tbl_locations as l on i.location_id = l.location_id " +
-                             "WHERE i.item_id = @item_id";
-
-            
-            using (SqlConnection conn = new SqlConnection(_conn))
-            {
-                SqlCommand cmd = new SqlCommand(command, conn);
-                cmd.Parameters.AddWithValue("@item_id", item_id);
-                conn.Open();
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    dt.Load(reader);
-                }
-            }
-            return dt;
-
-        }
-
     }
 }
