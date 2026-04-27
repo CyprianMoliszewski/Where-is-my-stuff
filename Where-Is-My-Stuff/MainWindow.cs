@@ -32,7 +32,7 @@ namespace Where_Is_My_Stuff
             //Tree view
             resfreshTrees();
 
-
+            splitContainer1.SplitterDistance = splitContainer1.Width / 2;
 
             //Combobox
             cb_categories.Items.AddRange(dh.GetValueForCombobox("tbl_categories", "category_name").ToArray());
@@ -102,7 +102,12 @@ namespace Where_Is_My_Stuff
         private void tree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             var selectedNode = e.Node;
-
+            var isLocation = selectedNode.Tag as TreeNodeLocation;
+            if (isLocation.IsLocation)
+            {
+                return;
+            }
+            
             using (var frm = new ItemAddOrEdit('E', selectedNode))
             {
                 if (frm.ShowDialog() == DialogResult.OK)

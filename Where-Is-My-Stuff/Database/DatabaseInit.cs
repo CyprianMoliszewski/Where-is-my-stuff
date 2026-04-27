@@ -43,13 +43,13 @@ namespace Where_Is_My_Stuff.Database
         public DatabaseInit()
         {
             // COMMENT LINE BELOW IF YOU WANT SQLSERVER AS DATA SOURCE
-            //ConfigurateLocalDatabase();
+            ConfigurateLocalDatabase();
         }
         public string GetConn()
         {
             // COMMENT LINE BELOW IF YOU WANT SQLSERVER AS DATA SOURCE
-            //return _connStringWims;
-            return _connStringWimsSqlServer;
+            return _connStringWims;
+            //return _connStringWimsSqlServer;
         }
         private void ConfigurateLocalDatabase()
         {

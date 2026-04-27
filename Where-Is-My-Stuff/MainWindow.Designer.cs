@@ -34,7 +34,6 @@
             this.cb_owners = new System.Windows.Forms.ComboBox();
             this.tb_name = new System.Windows.Forms.TextBox();
             this.btn_searchView = new System.Windows.Forms.Button();
-            this.btn_archiveView = new System.Windows.Forms.Button();
             this.btn_logsView = new System.Windows.Forms.Button();
             this.btn_settingsView = new System.Windows.Forms.Button();
             this.tbc_mainWindow = new System.Windows.Forms.TabControl();
@@ -54,6 +53,9 @@
             this.tab_logs = new System.Windows.Forms.TabPage();
             this.tab_archive = new System.Windows.Forms.TabPage();
             this.btn_mainView = new System.Windows.Forms.Button();
+            this.lbl_categories = new System.Windows.Forms.Label();
+            this.lbl_owner = new System.Windows.Forms.Label();
+            this.lbl_item = new System.Windows.Forms.Label();
             this.tbc_mainWindow.SuspendLayout();
             this.tab_treeView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -69,72 +71,61 @@
             // 
             this.cb_categories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_categories.FormattingEnabled = true;
-            this.cb_categories.Location = new System.Drawing.Point(67, 12);
-            this.cb_categories.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cb_categories.Location = new System.Drawing.Point(73, 34);
+            this.cb_categories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cb_categories.Name = "cb_categories";
-            this.cb_categories.Size = new System.Drawing.Size(121, 24);
+            this.cb_categories.Size = new System.Drawing.Size(92, 21);
             this.cb_categories.TabIndex = 0;
             // 
             // cb_owners
             // 
             this.cb_owners.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_owners.FormattingEnabled = true;
-            this.cb_owners.Location = new System.Drawing.Point(195, 12);
-            this.cb_owners.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cb_owners.Location = new System.Drawing.Point(169, 34);
+            this.cb_owners.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cb_owners.Name = "cb_owners";
-            this.cb_owners.Size = new System.Drawing.Size(121, 24);
+            this.cb_owners.Size = new System.Drawing.Size(92, 21);
             this.cb_owners.TabIndex = 1;
             // 
             // tb_name
             // 
-            this.tb_name.Location = new System.Drawing.Point(321, 12);
-            this.tb_name.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tb_name.Location = new System.Drawing.Point(265, 35);
+            this.tb_name.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tb_name.Name = "tb_name";
-            this.tb_name.Size = new System.Drawing.Size(121, 22);
+            this.tb_name.Size = new System.Drawing.Size(92, 20);
             this.tb_name.TabIndex = 2;
             // 
             // btn_searchView
             // 
-            this.btn_searchView.Location = new System.Drawing.Point(448, 12);
-            this.btn_searchView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_searchView.Location = new System.Drawing.Point(361, 33);
+            this.btn_searchView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_searchView.Name = "btn_searchView";
-            this.btn_searchView.Size = new System.Drawing.Size(75, 23);
+            this.btn_searchView.Size = new System.Drawing.Size(60, 22);
             this.btn_searchView.TabIndex = 3;
             this.btn_searchView.TabStop = false;
             this.btn_searchView.Text = "Filtruj";
             this.btn_searchView.UseVisualStyleBackColor = true;
             this.btn_searchView.Click += new System.EventHandler(this.btn_searchView_Click);
             // 
-            // btn_archiveView
-            // 
-            this.btn_archiveView.Location = new System.Drawing.Point(533, 11);
-            this.btn_archiveView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_archiveView.Name = "btn_archiveView";
-            this.btn_archiveView.Size = new System.Drawing.Size(75, 23);
-            this.btn_archiveView.TabIndex = 4;
-            this.btn_archiveView.Text = "button2";
-            this.btn_archiveView.UseVisualStyleBackColor = true;
-            this.btn_archiveView.Click += new System.EventHandler(this.btn_archiveView_Click);
-            // 
             // btn_logsView
             // 
-            this.btn_logsView.Location = new System.Drawing.Point(613, 11);
-            this.btn_logsView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_logsView.Location = new System.Drawing.Point(425, 32);
+            this.btn_logsView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_logsView.Name = "btn_logsView";
-            this.btn_logsView.Size = new System.Drawing.Size(75, 23);
+            this.btn_logsView.Size = new System.Drawing.Size(60, 22);
             this.btn_logsView.TabIndex = 5;
-            this.btn_logsView.Text = "button3";
+            this.btn_logsView.Text = "Logi";
             this.btn_logsView.UseVisualStyleBackColor = true;
             this.btn_logsView.Click += new System.EventHandler(this.btn_logsView_Click);
             // 
             // btn_settingsView
             // 
-            this.btn_settingsView.Location = new System.Drawing.Point(695, 12);
-            this.btn_settingsView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_settingsView.Location = new System.Drawing.Point(490, 31);
+            this.btn_settingsView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_settingsView.Name = "btn_settingsView";
-            this.btn_settingsView.Size = new System.Drawing.Size(75, 23);
+            this.btn_settingsView.Size = new System.Drawing.Size(86, 23);
             this.btn_settingsView.TabIndex = 6;
-            this.btn_settingsView.Text = "button4";
+            this.btn_settingsView.Text = "Ustawienia";
             this.btn_settingsView.UseVisualStyleBackColor = true;
             // 
             // tbc_mainWindow
@@ -145,11 +136,11 @@
             this.tbc_mainWindow.Controls.Add(this.tab_logs);
             this.tbc_mainWindow.Controls.Add(this.tab_archive);
             this.tbc_mainWindow.ItemSize = new System.Drawing.Size(100, 10);
-            this.tbc_mainWindow.Location = new System.Drawing.Point(12, 127);
-            this.tbc_mainWindow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbc_mainWindow.Location = new System.Drawing.Point(9, 103);
+            this.tbc_mainWindow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbc_mainWindow.Name = "tbc_mainWindow";
             this.tbc_mainWindow.SelectedIndex = 0;
-            this.tbc_mainWindow.Size = new System.Drawing.Size(757, 414);
+            this.tbc_mainWindow.Size = new System.Drawing.Size(568, 336);
             this.tbc_mainWindow.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tbc_mainWindow.TabIndex = 7;
             // 
@@ -157,10 +148,10 @@
             // 
             this.tab_treeView.Controls.Add(this.splitContainer1);
             this.tab_treeView.Location = new System.Drawing.Point(4, 14);
-            this.tab_treeView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tab_treeView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tab_treeView.Name = "tab_treeView";
-            this.tab_treeView.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tab_treeView.Size = new System.Drawing.Size(749, 396);
+            this.tab_treeView.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tab_treeView.Size = new System.Drawing.Size(560, 318);
             this.tab_treeView.TabIndex = 0;
             this.tab_treeView.Text = "tab_treeView";
             this.tab_treeView.UseVisualStyleBackColor = true;
@@ -169,8 +160,8 @@
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 2);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitContainer1.Location = new System.Drawing.Point(2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -180,8 +171,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tree_right);
-            this.splitContainer1.Size = new System.Drawing.Size(743, 392);
-            this.splitContainer1.SplitterDistance = 387;
+            this.splitContainer1.Size = new System.Drawing.Size(556, 314);
+            this.splitContainer1.SplitterDistance = 289;
+            this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 0;
             // 
             // tree_left
@@ -192,10 +184,10 @@
             this.tree_left.ImageIndex = 0;
             this.tree_left.ImageList = this.imageListForTreeView;
             this.tree_left.Location = new System.Drawing.Point(0, 0);
-            this.tree_left.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tree_left.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tree_left.Name = "tree_left";
             this.tree_left.SelectedImageIndex = 0;
-            this.tree_left.Size = new System.Drawing.Size(385, 390);
+            this.tree_left.Size = new System.Drawing.Size(287, 312);
             this.tree_left.TabIndex = 0;
             this.tree_left.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tree_ItemDrag);
             this.tree_left.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_NodeMouseDoubleClick);
@@ -213,40 +205,40 @@
             this.edytujToolStripMenuItem,
             this.usuńToolStripMenuItem});
             this.treeViewContextMenu.Name = "treeViewContextMenu";
-            this.treeViewContextMenu.Size = new System.Drawing.Size(222, 124);
+            this.treeViewContextMenu.Size = new System.Drawing.Size(186, 114);
             // 
             // dodajPomieszczenieToolStripMenuItem
             // 
             this.dodajPomieszczenieToolStripMenuItem.Name = "dodajPomieszczenieToolStripMenuItem";
-            this.dodajPomieszczenieToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
+            this.dodajPomieszczenieToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.dodajPomieszczenieToolStripMenuItem.Text = "Dodaj pomieszczenie";
             this.dodajPomieszczenieToolStripMenuItem.Click += new System.EventHandler(this.dodajPomieszczenieToolStripMenuItem_Click);
             // 
             // dodajLokacjeToolStripMenuItem
             // 
             this.dodajLokacjeToolStripMenuItem.Name = "dodajLokacjeToolStripMenuItem";
-            this.dodajLokacjeToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
+            this.dodajLokacjeToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.dodajLokacjeToolStripMenuItem.Text = "Dodaj lokacje";
             this.dodajLokacjeToolStripMenuItem.Click += new System.EventHandler(this.dodajLokacjeToolStripMenuItem_Click);
             // 
             // dodajPrzedmiotToolStripMenuItem
             // 
             this.dodajPrzedmiotToolStripMenuItem.Name = "dodajPrzedmiotToolStripMenuItem";
-            this.dodajPrzedmiotToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
+            this.dodajPrzedmiotToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.dodajPrzedmiotToolStripMenuItem.Text = "Dodaj przedmiot";
             this.dodajPrzedmiotToolStripMenuItem.Click += new System.EventHandler(this.dodajPrzedmiotToolStripMenuItem_Click);
             // 
             // edytujToolStripMenuItem
             // 
             this.edytujToolStripMenuItem.Name = "edytujToolStripMenuItem";
-            this.edytujToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
+            this.edytujToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.edytujToolStripMenuItem.Text = "Edytuj";
             this.edytujToolStripMenuItem.Click += new System.EventHandler(this.edytujToolStripMenuItem_Click);
             // 
             // usuńToolStripMenuItem
             // 
             this.usuńToolStripMenuItem.Name = "usuńToolStripMenuItem";
-            this.usuńToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
+            this.usuńToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.usuńToolStripMenuItem.Text = "Usuń";
             this.usuńToolStripMenuItem.Click += new System.EventHandler(this.usuńToolStripMenuItem_Click);
             // 
@@ -267,10 +259,10 @@
             this.tree_right.ImageIndex = 0;
             this.tree_right.ImageList = this.imageListForTreeView;
             this.tree_right.Location = new System.Drawing.Point(0, 0);
-            this.tree_right.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tree_right.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tree_right.Name = "tree_right";
             this.tree_right.SelectedImageIndex = 0;
-            this.tree_right.Size = new System.Drawing.Size(350, 390);
+            this.tree_right.Size = new System.Drawing.Size(262, 312);
             this.tree_right.TabIndex = 0;
             this.tree_right.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tree_ItemDrag);
             this.tree_right.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_NodeMouseDoubleClick);
@@ -282,9 +274,9 @@
             // 
             this.tab_filter.Controls.Add(this.dg_itemsView);
             this.tab_filter.Location = new System.Drawing.Point(4, 14);
-            this.tab_filter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tab_filter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tab_filter.Name = "tab_filter";
-            this.tab_filter.Size = new System.Drawing.Size(749, 396);
+            this.tab_filter.Size = new System.Drawing.Size(560, 318);
             this.tab_filter.TabIndex = 3;
             this.tab_filter.Text = "tab_filter";
             this.tab_filter.UseVisualStyleBackColor = true;
@@ -292,21 +284,21 @@
             // dg_itemsView
             // 
             this.dg_itemsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_itemsView.Location = new System.Drawing.Point(36, 2);
-            this.dg_itemsView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dg_itemsView.Location = new System.Drawing.Point(27, 2);
+            this.dg_itemsView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dg_itemsView.Name = "dg_itemsView";
             this.dg_itemsView.RowHeadersWidth = 51;
             this.dg_itemsView.RowTemplate.Height = 24;
-            this.dg_itemsView.Size = new System.Drawing.Size(668, 319);
+            this.dg_itemsView.Size = new System.Drawing.Size(501, 259);
             this.dg_itemsView.TabIndex = 0;
             // 
             // tab_logs
             // 
             this.tab_logs.Location = new System.Drawing.Point(4, 14);
-            this.tab_logs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tab_logs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tab_logs.Name = "tab_logs";
-            this.tab_logs.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tab_logs.Size = new System.Drawing.Size(749, 396);
+            this.tab_logs.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tab_logs.Size = new System.Drawing.Size(560, 318);
             this.tab_logs.TabIndex = 1;
             this.tab_logs.Text = "tab_logs";
             this.tab_logs.UseVisualStyleBackColor = true;
@@ -314,41 +306,70 @@
             // tab_archive
             // 
             this.tab_archive.Location = new System.Drawing.Point(4, 14);
-            this.tab_archive.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tab_archive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tab_archive.Name = "tab_archive";
-            this.tab_archive.Size = new System.Drawing.Size(749, 396);
+            this.tab_archive.Size = new System.Drawing.Size(560, 318);
             this.tab_archive.TabIndex = 2;
             this.tab_archive.Text = "tab_archive";
             this.tab_archive.UseVisualStyleBackColor = true;
             // 
             // btn_mainView
             // 
-            this.btn_mainView.Location = new System.Drawing.Point(12, 11);
-            this.btn_mainView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_mainView.Location = new System.Drawing.Point(12, 34);
+            this.btn_mainView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_mainView.Name = "btn_mainView";
-            this.btn_mainView.Size = new System.Drawing.Size(49, 25);
+            this.btn_mainView.Size = new System.Drawing.Size(58, 22);
             this.btn_mainView.TabIndex = 8;
-            this.btn_mainView.Text = "button5";
+            this.btn_mainView.Text = "Home";
             this.btn_mainView.UseVisualStyleBackColor = true;
             this.btn_mainView.Click += new System.EventHandler(this.btn_mainView_Click);
             // 
+            // lbl_categories
+            // 
+            this.lbl_categories.AutoSize = true;
+            this.lbl_categories.Location = new System.Drawing.Point(74, 19);
+            this.lbl_categories.Name = "lbl_categories";
+            this.lbl_categories.Size = new System.Drawing.Size(52, 13);
+            this.lbl_categories.TabIndex = 9;
+            this.lbl_categories.Text = "Kategorie";
+            // 
+            // lbl_owner
+            // 
+            this.lbl_owner.AutoSize = true;
+            this.lbl_owner.Location = new System.Drawing.Point(170, 19);
+            this.lbl_owner.Name = "lbl_owner";
+            this.lbl_owner.Size = new System.Drawing.Size(57, 13);
+            this.lbl_owner.TabIndex = 10;
+            this.lbl_owner.Text = "Właściciel";
+            // 
+            // lbl_item
+            // 
+            this.lbl_item.AutoSize = true;
+            this.lbl_item.Location = new System.Drawing.Point(266, 19);
+            this.lbl_item.Name = "lbl_item";
+            this.lbl_item.Size = new System.Drawing.Size(53, 13);
+            this.lbl_item.TabIndex = 11;
+            this.lbl_item.Text = "Przedmiot";
+            // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(781, 551);
+            this.ClientSize = new System.Drawing.Size(587, 454);
+            this.Controls.Add(this.lbl_item);
+            this.Controls.Add(this.lbl_owner);
+            this.Controls.Add(this.lbl_categories);
             this.Controls.Add(this.btn_mainView);
             this.Controls.Add(this.tbc_mainWindow);
             this.Controls.Add(this.btn_settingsView);
             this.Controls.Add(this.btn_logsView);
-            this.Controls.Add(this.btn_archiveView);
             this.Controls.Add(this.btn_searchView);
             this.Controls.Add(this.tb_name);
             this.Controls.Add(this.cb_owners);
             this.Controls.Add(this.cb_categories);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(799, 598);
-            this.MinimumSize = new System.Drawing.Size(799, 598);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximumSize = new System.Drawing.Size(603, 493);
+            this.MinimumSize = new System.Drawing.Size(603, 493);
             this.Name = "MainWindow";
             this.Text = "Where Is My Stuff?";
             this.Load += new System.EventHandler(this.MainWindow_Load);
@@ -372,7 +393,6 @@
         private System.Windows.Forms.ComboBox cb_owners;
         private System.Windows.Forms.TextBox tb_name;
         private System.Windows.Forms.Button btn_searchView;
-        private System.Windows.Forms.Button btn_archiveView;
         private System.Windows.Forms.Button btn_logsView;
         private System.Windows.Forms.Button btn_settingsView;
         private System.Windows.Forms.TabPage tab_treeView;
@@ -392,6 +412,9 @@
         private System.Windows.Forms.ToolStripMenuItem usuńToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dodajPomieszczenieToolStripMenuItem;
         private System.Windows.Forms.ImageList imageListForTreeView;
+        private System.Windows.Forms.Label lbl_categories;
+        private System.Windows.Forms.Label lbl_owner;
+        private System.Windows.Forms.Label lbl_item;
     }
 }
 

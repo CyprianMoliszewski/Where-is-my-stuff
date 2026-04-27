@@ -36,9 +36,10 @@
             // 
             // btn_cancle
             // 
-            this.btn_cancle.Location = new System.Drawing.Point(7, 56);
+            this.btn_cancle.Location = new System.Drawing.Point(5, 46);
+            this.btn_cancle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_cancle.Name = "btn_cancle";
-            this.btn_cancle.Size = new System.Drawing.Size(75, 23);
+            this.btn_cancle.Size = new System.Drawing.Size(56, 19);
             this.btn_cancle.TabIndex = 0;
             this.btn_cancle.Text = "Anuluj";
             this.btn_cancle.UseVisualStyleBackColor = true;
@@ -46,9 +47,10 @@
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(88, 56);
+            this.btn_save.Location = new System.Drawing.Point(66, 46);
+            this.btn_save.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(75, 23);
+            this.btn_save.Size = new System.Drawing.Size(56, 19);
             this.btn_save.TabIndex = 1;
             this.btn_save.Text = "Zapisz";
             this.btn_save.UseVisualStyleBackColor = true;
@@ -57,30 +59,37 @@
             // lbl_room_name
             // 
             this.lbl_room_name.AutoSize = true;
-            this.lbl_room_name.Location = new System.Drawing.Point(4, 9);
+            this.lbl_room_name.Location = new System.Drawing.Point(3, 7);
+            this.lbl_room_name.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_room_name.Name = "lbl_room_name";
-            this.lbl_room_name.Size = new System.Drawing.Size(48, 16);
+            this.lbl_room_name.Size = new System.Drawing.Size(40, 13);
             this.lbl_room_name.TabIndex = 2;
             this.lbl_room_name.Text = "Nazwa";
             // 
             // tb_room_name
             // 
-            this.tb_room_name.Location = new System.Drawing.Point(7, 28);
+            this.tb_room_name.Location = new System.Drawing.Point(5, 23);
+            this.tb_room_name.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tb_room_name.Name = "tb_room_name";
-            this.tb_room_name.Size = new System.Drawing.Size(156, 22);
+            this.tb_room_name.Size = new System.Drawing.Size(118, 20);
             this.tb_room_name.TabIndex = 3;
             // 
             // AddRoom
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(167, 87);
+            this.ClientSize = new System.Drawing.Size(125, 71);
             this.Controls.Add(this.tb_room_name);
             this.Controls.Add(this.lbl_room_name);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.btn_cancle);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddRoom";
-            this.Text = "AddRoom";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Dodanie pokoju";
             this.ResumeLayout(false);
             this.PerformLayout();
 

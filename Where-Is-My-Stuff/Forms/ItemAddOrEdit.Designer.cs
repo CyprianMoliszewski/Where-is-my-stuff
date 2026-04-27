@@ -45,86 +45,96 @@
             // lbl_item_name
             // 
             this.lbl_item_name.AutoSize = true;
-            this.lbl_item_name.Location = new System.Drawing.Point(9, 9);
+            this.lbl_item_name.Location = new System.Drawing.Point(7, 7);
+            this.lbl_item_name.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_item_name.Name = "lbl_item_name";
-            this.lbl_item_name.Size = new System.Drawing.Size(48, 16);
+            this.lbl_item_name.Size = new System.Drawing.Size(40, 13);
             this.lbl_item_name.TabIndex = 0;
             this.lbl_item_name.Text = "Nazwa";
             // 
             // lbl_item_category
             // 
             this.lbl_item_category.AutoSize = true;
-            this.lbl_item_category.Location = new System.Drawing.Point(9, 53);
+            this.lbl_item_category.Location = new System.Drawing.Point(7, 43);
+            this.lbl_item_category.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_item_category.Name = "lbl_item_category";
-            this.lbl_item_category.Size = new System.Drawing.Size(65, 16);
+            this.lbl_item_category.Size = new System.Drawing.Size(52, 13);
             this.lbl_item_category.TabIndex = 1;
             this.lbl_item_category.Text = "Kategoria";
             // 
             // lbl_item_owner
             // 
             this.lbl_item_owner.AutoSize = true;
-            this.lbl_item_owner.Location = new System.Drawing.Point(9, 99);
+            this.lbl_item_owner.Location = new System.Drawing.Point(7, 80);
+            this.lbl_item_owner.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_item_owner.Name = "lbl_item_owner";
-            this.lbl_item_owner.Size = new System.Drawing.Size(72, 16);
+            this.lbl_item_owner.Size = new System.Drawing.Size(57, 13);
             this.lbl_item_owner.TabIndex = 2;
             this.lbl_item_owner.Text = "Właściciel";
             // 
             // tb_item_name
             // 
-            this.tb_item_name.Location = new System.Drawing.Point(12, 28);
+            this.tb_item_name.Location = new System.Drawing.Point(9, 23);
+            this.tb_item_name.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tb_item_name.Name = "tb_item_name";
-            this.tb_item_name.Size = new System.Drawing.Size(156, 22);
+            this.tb_item_name.Size = new System.Drawing.Size(118, 20);
             this.tb_item_name.TabIndex = 3;
             // 
             // cb_item_category
             // 
             this.cb_item_category.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_item_category.FormattingEnabled = true;
-            this.cb_item_category.Location = new System.Drawing.Point(12, 72);
+            this.cb_item_category.Location = new System.Drawing.Point(9, 58);
+            this.cb_item_category.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cb_item_category.Name = "cb_item_category";
-            this.cb_item_category.Size = new System.Drawing.Size(156, 24);
+            this.cb_item_category.Size = new System.Drawing.Size(118, 21);
             this.cb_item_category.TabIndex = 4;
             // 
             // cb_item_owner
             // 
             this.cb_item_owner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_item_owner.FormattingEnabled = true;
-            this.cb_item_owner.Location = new System.Drawing.Point(12, 118);
+            this.cb_item_owner.Location = new System.Drawing.Point(9, 96);
+            this.cb_item_owner.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cb_item_owner.Name = "cb_item_owner";
-            this.cb_item_owner.Size = new System.Drawing.Size(156, 24);
+            this.cb_item_owner.Size = new System.Drawing.Size(118, 21);
             this.cb_item_owner.TabIndex = 5;
             // 
             // lbl_item_location
             // 
             this.lbl_item_location.AutoSize = true;
-            this.lbl_item_location.Location = new System.Drawing.Point(9, 302);
+            this.lbl_item_location.Location = new System.Drawing.Point(7, 245);
+            this.lbl_item_location.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_item_location.Name = "lbl_item_location";
-            this.lbl_item_location.Size = new System.Drawing.Size(75, 16);
+            this.lbl_item_location.Size = new System.Drawing.Size(60, 13);
             this.lbl_item_location.TabIndex = 6;
             this.lbl_item_location.Text = "Lokalizacja";
             // 
             // lbl_item_description
             // 
             this.lbl_item_description.AutoSize = true;
-            this.lbl_item_description.Location = new System.Drawing.Point(9, 145);
+            this.lbl_item_description.Location = new System.Drawing.Point(7, 118);
+            this.lbl_item_description.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_item_description.Name = "lbl_item_description";
-            this.lbl_item_description.Size = new System.Drawing.Size(35, 16);
+            this.lbl_item_description.Size = new System.Drawing.Size(28, 13);
             this.lbl_item_description.TabIndex = 10;
             this.lbl_item_description.Text = "Opis";
             // 
             // tb_item_description
             // 
-            this.tb_item_description.Location = new System.Drawing.Point(12, 164);
+            this.tb_item_description.Location = new System.Drawing.Point(9, 133);
+            this.tb_item_description.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tb_item_description.Multiline = true;
             this.tb_item_description.Name = "tb_item_description";
-            this.tb_item_description.Size = new System.Drawing.Size(156, 135);
+            this.tb_item_description.Size = new System.Drawing.Size(118, 110);
             this.tb_item_description.TabIndex = 11;
             // 
             // btn_cancle
             // 
-            this.btn_cancle.Location = new System.Drawing.Point(12, 421);
+            this.btn_cancle.Location = new System.Drawing.Point(9, 342);
+            this.btn_cancle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_cancle.Name = "btn_cancle";
-            this.btn_cancle.Size = new System.Drawing.Size(75, 23);
+            this.btn_cancle.Size = new System.Drawing.Size(56, 19);
             this.btn_cancle.TabIndex = 12;
             this.btn_cancle.Text = "Anuluj";
             this.btn_cancle.UseVisualStyleBackColor = true;
@@ -132,9 +142,10 @@
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(93, 421);
+            this.btn_save.Location = new System.Drawing.Point(70, 342);
+            this.btn_save.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(75, 23);
+            this.btn_save.Size = new System.Drawing.Size(56, 19);
             this.btn_save.TabIndex = 13;
             this.btn_save.Text = "Zapisz";
             this.btn_save.UseVisualStyleBackColor = true;
@@ -143,17 +154,18 @@
             // tb_item_location
             // 
             this.tb_item_location.Enabled = false;
-            this.tb_item_location.Location = new System.Drawing.Point(12, 321);
+            this.tb_item_location.Location = new System.Drawing.Point(9, 261);
+            this.tb_item_location.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tb_item_location.Multiline = true;
             this.tb_item_location.Name = "tb_item_location";
-            this.tb_item_location.Size = new System.Drawing.Size(156, 94);
+            this.tb_item_location.Size = new System.Drawing.Size(118, 77);
             this.tb_item_location.TabIndex = 14;
             // 
             // ItemAddOrEdit
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(182, 452);
+            this.ClientSize = new System.Drawing.Size(136, 367);
             this.Controls.Add(this.tb_item_location);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.btn_cancle);
@@ -166,8 +178,13 @@
             this.Controls.Add(this.lbl_item_owner);
             this.Controls.Add(this.lbl_item_category);
             this.Controls.Add(this.lbl_item_name);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ItemAddOrEdit";
-            this.Text = "ItemAdd";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Dodanie przedmiotu";
             this.ResumeLayout(false);
             this.PerformLayout();
 
