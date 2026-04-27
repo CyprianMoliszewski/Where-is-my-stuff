@@ -54,6 +54,27 @@ namespace Where_Is_My_Stuff.Services
             {
                 TreeNode node = new TreeNode(locationOrItem.Name);
                 node.Tag = locationOrItem;
+
+                int iconIndex = 0;
+
+                if (!locationOrItem.IsLocation)
+                {
+                    iconIndex = 3;
+                }
+                else
+                {
+                    switch (locationOrItem.TypeId)
+                    {
+                        case 1: iconIndex = 0; break;
+                        case 2: iconIndex = 1; break;
+                        case 3: iconIndex = 2; break;
+                        default: iconIndex = 0; break;
+                    }
+                }
+
+                node.ImageIndex = iconIndex;
+                node.SelectedImageIndex = iconIndex;
+
                 branch.Add(node);
 
                 if (!locationOrItem.IsLocation) continue;

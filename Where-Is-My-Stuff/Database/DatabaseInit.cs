@@ -13,6 +13,9 @@ namespace Where_Is_My_Stuff.Database
 {
     internal class DatabaseInit
     {
+        /// <summary>
+        /// CONNECTIONS STRING AND PATHS FOR CONFIGURATE LOCAL DB (.MDF FILE)
+        /// </summary>
         private static readonly string _databaseName = "wismDb.mdf";
         private static readonly string _databasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databaseName);
 
@@ -24,8 +27,31 @@ namespace Where_Is_My_Stuff.Database
 
         private static readonly string _connStringMaster = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True";
         private static readonly string _connStringWims = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={_databasePath};Integrated Security=True;Connect Timeout=30";
-        
+
+        /// <summary>
+        /// CONNECTION STRING FOR DATABASE ON SQL SERVER
+        /// </summary>
+        private static readonly string _connStringWimsSqlServer = @"Server=.\SQLEXPRESS; Database=WIMS; Trusted_Connection=True; TrustServerCertificate=True;";
+
+        /// <summary>
+        /// TO CHANGE DATASOURCE (LOCAL/SQLSERVER) COMMENT/UNCOMMENT LINES BELOW:
+        /// SQL SERVER:
+        /// COMMENT LINE 46 AND 51 | KEEP LINE 50 UNCOMMENT!
+        /// LOCAL DATABASE (.MDF):
+        /// COMMENT LINE 52 | KEEP LINE 51 AND 46 UNCOMMENT!
+        /// </summary>
         public DatabaseInit()
+        {
+            // COMMENT LINE BELOW IF YOU WANT SQLSERVER AS DATA SOURCE
+            //ConfigurateLocalDatabase();
+        }
+        public string GetConn()
+        {
+            // COMMENT LINE BELOW IF YOU WANT SQLSERVER AS DATA SOURCE
+            //return _connStringWims;
+            return _connStringWimsSqlServer;
+        }
+        private void ConfigurateLocalDatabase()
         {
             try
             {
@@ -39,11 +65,7 @@ namespace Where_Is_My_Stuff.Database
             catch (Exception e)
             {
                 Debug.WriteLine(e);
-            } 
-        }
-        public string GetConn()
-        {
-            return _connStringWims;
+            }
         }
         private bool CheckIfDataBaseExist()
         {
