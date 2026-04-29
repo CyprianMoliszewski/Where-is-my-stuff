@@ -17,7 +17,8 @@ namespace Where_Is_My_Stuff.Forms
         private readonly char _addOrEdit;
         private readonly TreeNodeLocation _location;
         private readonly TreeNodeItem _item;
-        
+        private readonly int _editingItemId;
+
         public ItemAddOrEdit(char addOrEdit, TreeNode selectedNode)
         {
             DatabaseHandler dh = DatabaseHandler.Instance;
@@ -47,6 +48,29 @@ namespace Where_Is_My_Stuff.Forms
             }
         }
 
+        //szczegóły filtrowanych przedmiotów
+        public ItemAddOrEdit(char addOrEdit, DataGridViewRow row)
+        {
+            DatabaseHandler dh = DatabaseHandler.Instance;
+            InitializeComponent();
+
+            _addOrEdit = addOrEdit;
+            _editingItemId = Convert.ToInt32(row.Cells["item_id"].Value);
+
+            tb_item_location.Enabled = false;
+
+            cb_item_category.Items.AddRange(dh.GetValueForCombobox("tbl_categories", "category_name").ToArray());
+            cb_item_owner.Items.AddRange(dh.GetValueForCombobox("tbl_owners", "owner_name").ToArray());
+
+            if (_addOrEdit == 'E')
+            {
+                tb_item_name.Text = row.Cells["Przedmiot"].Value.ToString();
+                tb_item_description.Text = row.Cells["item_description"].Value.ToString();
+                cb_item_category.Text = row.Cells["Kategoria"].Value.ToString();
+                cb_item_owner.Text = row.Cells["Właściciel"].Value.ToString();
+                tb_item_location.Text = row.Cells["Lokalizacja"].Value.ToString();
+            }
+        }
 
         private void btn_cancle_Click(object sender, EventArgs e)
         {
@@ -93,7 +117,11 @@ namespace Where_Is_My_Stuff.Forms
             }
             else
             {
-                dh.EditItem(_item.Id,
+                int savedId;
+                if (_item != null) { savedId = _item.Id; }
+                else { savedId = _editingItemId; }
+
+                dh.EditItem(savedId,
                     tb_item_name.Text,
                     cb_item_category.Text,
                     cb_item_owner.Text,

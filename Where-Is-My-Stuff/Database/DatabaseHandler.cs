@@ -503,11 +503,12 @@ namespace Where_Is_My_Stuff.Database
         public DataTable GetItmes()
         {
             DataTable dt = new DataTable();
-            string command = "SELECT i.item_id, i.item_name as 'Przedmiot', c.category_name as 'Kategoria', o.owner_name as 'Właściciel', l.location_name as 'Lokalizacja' "+
+            string command = "SELECT i.item_id, i.item_description, i.item_name as 'Przedmiot', c.category_name as 'Kategoria', o.owner_name as 'Właściciel', l.location_name as 'Lokalizacja' " +
                              "FROM tbl_items as i " +
                              "INNER JOIN tbl_categories as c ON i.category_id = c.category_id " +
                              "INNER JOIN tbl_owners as o ON i.owner_id = o.owner_id " +
-                             "INNER JOIN tbl_locations as l on i.location_id = l.location_id";
+                             "INNER JOIN tbl_locations as l on i.location_id = l.location_id " +
+                             "WHERE i.is_active = 1";
 
             using (SqlConnection conn = new SqlConnection(_conn))
             {
@@ -524,5 +525,110 @@ namespace Where_Is_My_Stuff.Database
         ///
         /// 
         ///
+
+        ///
+        ///    GET ALL CATEGORIES
+        ///
+        public List<string> GetCategories()
+        {
+            List<string> category = new List<string>();
+
+            string command = "SELECT category_name from tbl_categories";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                SqlCommand cmd = new SqlCommand(command, conn);
+                conn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        string name = reader.GetString(reader.GetOrdinal("category_name"));
+                        category.Add(name);
+                    }
+                }
+            }
+            return category;
+        }
+        ///
+        /// 
+        ///
+
+        ///
+        ///    GET ALL COWNERS
+        ///
+        public List<string> GetOwners()
+        {
+            List<string> owner = new List<string>();
+
+            string command = "SELECT owner_name from tbl_owners";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                SqlCommand cmd = new SqlCommand(command, conn);
+                conn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        string name = reader.GetString(reader.GetOrdinal("owner_name"));
+                        owner.Add(name);
+                    }
+                }
+            }
+            return owner;
+        }
+
+        ///
+        /// 
+        ///
+
+        ///
+        ///    ADD NEW CATEGORY
+        ///   
+        public void AddCategory(string category)
+        {
+            string command = "INSERT INTO tbl_categories (category_name) VALUES (@category_name)";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                SqlCommand cmd = new SqlCommand(command, conn);               
+
+                cmd.Parameters.AddWithValue("@category_name", category);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }            
+        }
+
+        ///
+        /// 
+        ///
+
+        ///
+        ///    ADD NEW OWNER
+        ///   
+        public void AddOwner(string category)
+        {
+            string command = "INSERT INTO tbl_owners (owner_name) VALUES (@owner_name)";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                SqlCommand cmd = new SqlCommand(command, conn);
+
+                cmd.Parameters.AddWithValue("@owner_name", category);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+
     }
 }

@@ -38,11 +38,13 @@ namespace Where_Is_My_Stuff
             cb_categories.Items.AddRange(dh.GetValueForCombobox("tbl_categories", "category_name").ToArray());
             cb_owners.Items.AddRange(dh.GetValueForCombobox("tbl_owners", "owner_name").ToArray());
 
-            //DataGrid
-            DataTable items = dh.GetItmes();
-            bs.DataSource = items;
-            dg_itemsView.DataSource = bs;
-            dg_itemsView.Columns["item_id"].Visible = false;
+            //Settings
+            List<string> categories = dh.GetCategories();
+            lbl_categories_list.Text = string.Join("\n", categories);
+
+            List<string> owners = dh.GetOwners();
+            lbl_owners_list.Text = string.Join("\n", owners);
+
         }
 
 
@@ -51,10 +53,21 @@ namespace Where_Is_My_Stuff
         /// </summary>
         private void btn_mainView_Click(object sender, EventArgs e)
         {
+            tree_left.Nodes.Clear();
+            TreeViewService treeViewService = new TreeViewService();
+            treeViewService.PopulateTree(tree_left);
+            tree_left.ExpandAll();
             tbc_mainWindow.SelectedIndex = 0;
         }
         private void btn_searchView_Click(object sender, EventArgs e)
         {
+            var dh = DatabaseHandler.Instance;
+            //DataGrid
+            DataTable items = dh.GetItmes();
+            bs.DataSource = items;
+            dg_itemsView.DataSource = bs;
+            dg_itemsView.Columns["item_id"].Visible = false;
+            dg_itemsView.Columns["item_description"].Visible = false;
             tbc_mainWindow.SelectedIndex = 1;
 
             FilterService fs = new FilterService();
@@ -65,9 +78,8 @@ namespace Where_Is_My_Stuff
             cb_owners.SelectedIndex = -1;
 
         }
-        private void btn_archiveView_Click(object sender, EventArgs e)
+        private void btn_settingsView_Click(object sender, EventArgs e)
         {
-
             tbc_mainWindow.SelectedIndex = 2;
         }
         private void btn_logsView_Click(object sender, EventArgs e)
@@ -353,6 +365,54 @@ namespace Where_Is_My_Stuff
             return result == DialogResult.Yes;
         }
 
+        private void dg_itemsView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            DataGridViewRow selectedRow = dg_itemsView.Rows[e.RowIndex];
+            ItemAddOrEdit form = new ItemAddOrEdit('E', selectedRow);
+            if (form.ShowDialog() == DialogResult.OK){
+                var dh = DatabaseHandler.Instance;
+                DataTable items = dh.GetItmes();
+                bs.DataSource = items;
+                dg_itemsView.DataSource = bs;
+                if (dg_itemsView.Columns.Contains("item_id"))
+                    dg_itemsView.Columns["item_id"].Visible = false;
+                if (dg_itemsView.Columns.Contains("item_description"))
+                    dg_itemsView.Columns["item_description"].Visible = false;
+                                
+            }
+        }
+
+        private void lbl_categories_list_Click(object sender, EventArgs e) { }        
+        
+        private void lbl_owners_list_Click(object sender, EventArgs e) { }
+
+        private void btn_add_category_Click(object sender, EventArgs e)
+        {
+            var dh = DatabaseHandler.Instance;
+            dh.AddCategory(txt_category.Text);
+
+            List<string> categories = dh.GetCategories();
+            lbl_categories_list.Text = string.Join("\n", categories);
+            txt_category.Clear();
+            cb_categories.Items.Clear();
+            cb_categories.Items.AddRange(dh.GetValueForCombobox("tbl_categories", "category_name").ToArray());
+        }
+
+        private void btn_add_owner_Click(object sender, EventArgs e)
+        {
+            var dh = DatabaseHandler.Instance;
+            dh.AddOwner(txt_add_owner.Text);
+
+            List<string> owners = dh.GetOwners();
+            lbl_owners_list.Text = string.Join("\n", owners);
+            txt_add_owner.Clear();
+            cb_owners.Items.Clear();
+            cb_owners.Items.AddRange(dh.GetValueForCombobox("tbl_owners", "owner_name").ToArray());
+        }
+        
+
+
     }
 }
-    
+   
