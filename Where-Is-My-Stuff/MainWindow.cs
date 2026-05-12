@@ -19,6 +19,8 @@ namespace Where_Is_My_Stuff
     public partial class MainWindow : Form
     {
         BindingSource bs = new BindingSource();
+        private ContextMenuStrip _logContextMenu;
+        private int _selectedLogId = -1;
         public MainWindow()
         {
             InitializeComponent();
@@ -53,10 +55,7 @@ namespace Where_Is_My_Stuff
         /// </summary>
         private void btn_mainView_Click(object sender, EventArgs e)
         {
-            tree_left.Nodes.Clear();
-            TreeViewService treeViewService = new TreeViewService();
-            treeViewService.PopulateTree(tree_left);
-            tree_left.ExpandAll();
+            resfreshTrees();
             tbc_mainWindow.SelectedIndex = 0;
         }
         private void btn_searchView_Click(object sender, EventArgs e)
@@ -84,7 +83,27 @@ namespace Where_Is_My_Stuff
         }
         private void btn_logsView_Click(object sender, EventArgs e)
         {
+            if (_logContextMenu == null)
+            {
+                _logContextMenu = new ContextMenuStrip();
+                ToolStripMenuItem undoMenuItem = new ToolStripMenuItem("Cofnij operację");
+                undoMenuItem.Click += UndoMenu_Click;
+                _logContextMenu.Items.Add(undoMenuItem);
+            }
 
+            var dh = DatabaseHandler.Instance;
+            DataSet logs = dh.GetLogs();
+            dg_logsView.DataSource = logs.Tables["LogsTable"];
+                       
+            dg_logsView.Columns["log_id"].Visible=false;
+            dg_logsView.Columns["operation_type_id"].Visible=false;
+            dg_logsView.Columns["tbl_name"].Visible=false;
+            dg_logsView.Columns["old_value"].Visible=false;
+            dg_logsView.Columns["new_value"].Visible=false;
+            dg_logsView.Columns["can_undo"].Visible=false;
+            dg_logsView.Columns["log_message"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dg_logsView.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dg_logsView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             tbc_mainWindow.SelectedIndex = 3;
         }
 
@@ -410,9 +429,50 @@ namespace Where_Is_My_Stuff
             cb_owners.Items.Clear();
             cb_owners.Items.AddRange(dh.GetValueForCombobox("tbl_owners", "owner_name").ToArray());
         }
-        
 
+        private void UndoMenu_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show(
+                "Czy na pewno chcesz cofnąć tę operację? \n\nJeśli istnieją nowsze powiązane operacje, one również zostaną cofnięte kaskadowo.",
+                "Potwierdzenie cofania",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
+            if (dialogResult == DialogResult.Yes)
+            {
+                LogsService logsService = new LogsService();
+                bool sukces = logsService.UndoLogs(_selectedLogId);
+
+                if (sukces)
+                {
+                    MessageBox.Show("Operacje zostały pomyślnie cofnięte!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btn_logsView_Click(null, null);
+                }
+                else
+                {
+                    MessageBox.Show("Wystąpił błąd podczas cofania zmian.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
+
+        private void dg_logsView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.RowIndex >= 0)
+            {
+                string undoValue = dg_logsView.Rows[e.RowIndex].Cells["can_undo"].Value.ToString().ToLower();
+
+                bool canUndo = (undoValue == "1" || undoValue == "true");
+
+                if (canUndo)
+                {
+                    dg_logsView.ClearSelection();
+                    dg_logsView.Rows[e.RowIndex].Selected = true;
+                    _selectedLogId = Convert.ToInt32(dg_logsView.Rows[e.RowIndex].Cells["log_id"].Value);
+                    _logContextMenu.Show(Cursor.Position);
+                }
+            }
+        }
     }
 }
    

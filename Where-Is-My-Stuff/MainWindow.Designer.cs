@@ -51,21 +51,22 @@
             this.tab_filter = new System.Windows.Forms.TabPage();
             this.dg_itemsView = new System.Windows.Forms.DataGridView();
             this.tab_logs = new System.Windows.Forms.TabPage();
+            this.txt_add_owner = new System.Windows.Forms.TextBox();
+            this.btn_add_owner = new System.Windows.Forms.Button();
+            this.lbl_owners_list = new System.Windows.Forms.Label();
+            this.lbl_add_owner = new System.Windows.Forms.Label();
+            this.lbl_owners_settings = new System.Windows.Forms.Label();
+            this.lbl_categories_list = new System.Windows.Forms.Label();
+            this.btn_add_category = new System.Windows.Forms.Button();
+            this.txt_category = new System.Windows.Forms.TextBox();
+            this.lbl_add_categories = new System.Windows.Forms.Label();
+            this.lbl_categories_settings = new System.Windows.Forms.Label();
             this.tab_archive = new System.Windows.Forms.TabPage();
+            this.dg_logsView = new System.Windows.Forms.DataGridView();
             this.btn_mainView = new System.Windows.Forms.Button();
             this.lbl_categories = new System.Windows.Forms.Label();
             this.lbl_owner = new System.Windows.Forms.Label();
             this.lbl_item = new System.Windows.Forms.Label();
-            this.lbl_categories_settings = new System.Windows.Forms.Label();
-            this.lbl_add_categories = new System.Windows.Forms.Label();
-            this.txt_category = new System.Windows.Forms.TextBox();
-            this.btn_add_category = new System.Windows.Forms.Button();
-            this.lbl_categories_list = new System.Windows.Forms.Label();
-            this.lbl_owners_settings = new System.Windows.Forms.Label();
-            this.lbl_add_owner = new System.Windows.Forms.Label();
-            this.lbl_owners_list = new System.Windows.Forms.Label();
-            this.btn_add_owner = new System.Windows.Forms.Button();
-            this.txt_add_owner = new System.Windows.Forms.TextBox();
             this.tbc_mainWindow.SuspendLayout();
             this.tab_treeView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -76,6 +77,8 @@
             this.tab_filter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_itemsView)).BeginInit();
             this.tab_logs.SuspendLayout();
+            this.tab_archive.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_logsView)).BeginInit();
             this.SuspendLayout();
             // 
             // cb_categories
@@ -326,8 +329,99 @@
             this.tab_logs.Text = "tab_settings";
             this.tab_logs.UseVisualStyleBackColor = true;
             // 
+            // txt_add_owner
+            // 
+            this.txt_add_owner.Location = new System.Drawing.Point(397, 94);
+            this.txt_add_owner.Name = "txt_add_owner";
+            this.txt_add_owner.Size = new System.Drawing.Size(100, 20);
+            this.txt_add_owner.TabIndex = 9;
+            // 
+            // btn_add_owner
+            // 
+            this.btn_add_owner.Location = new System.Drawing.Point(503, 94);
+            this.btn_add_owner.Name = "btn_add_owner";
+            this.btn_add_owner.Size = new System.Drawing.Size(28, 23);
+            this.btn_add_owner.TabIndex = 8;
+            this.btn_add_owner.Text = "+";
+            this.btn_add_owner.UseVisualStyleBackColor = true;
+            this.btn_add_owner.Click += new System.EventHandler(this.btn_add_owner_Click);
+            // 
+            // lbl_owners_list
+            // 
+            this.lbl_owners_list.AutoSize = true;
+            this.lbl_owners_list.Location = new System.Drawing.Point(313, 123);
+            this.lbl_owners_list.Name = "lbl_owners_list";
+            this.lbl_owners_list.Size = new System.Drawing.Size(35, 13);
+            this.lbl_owners_list.TabIndex = 7;
+            this.lbl_owners_list.Text = "label3";
+            this.lbl_owners_list.Click += new System.EventHandler(this.lbl_owners_list_Click);
+            // 
+            // lbl_add_owner
+            // 
+            this.lbl_add_owner.AutoSize = true;
+            this.lbl_add_owner.Location = new System.Drawing.Point(311, 97);
+            this.lbl_add_owner.Name = "lbl_add_owner";
+            this.lbl_add_owner.Size = new System.Drawing.Size(79, 13);
+            this.lbl_add_owner.TabIndex = 6;
+            this.lbl_add_owner.Text = "Dodaj nowego:";
+            // 
+            // lbl_owners_settings
+            // 
+            this.lbl_owners_settings.AutoSize = true;
+            this.lbl_owners_settings.Location = new System.Drawing.Point(313, 71);
+            this.lbl_owners_settings.Name = "lbl_owners_settings";
+            this.lbl_owners_settings.Size = new System.Drawing.Size(63, 13);
+            this.lbl_owners_settings.TabIndex = 5;
+            this.lbl_owners_settings.Text = "Właściciele";
+            // 
+            // lbl_categories_list
+            // 
+            this.lbl_categories_list.AutoSize = true;
+            this.lbl_categories_list.Location = new System.Drawing.Point(49, 123);
+            this.lbl_categories_list.Name = "lbl_categories_list";
+            this.lbl_categories_list.Size = new System.Drawing.Size(35, 13);
+            this.lbl_categories_list.TabIndex = 4;
+            this.lbl_categories_list.Text = "label3";
+            this.lbl_categories_list.Click += new System.EventHandler(this.lbl_categories_list_Click);
+            // 
+            // btn_add_category
+            // 
+            this.btn_add_category.Location = new System.Drawing.Point(220, 94);
+            this.btn_add_category.Name = "btn_add_category";
+            this.btn_add_category.Size = new System.Drawing.Size(28, 23);
+            this.btn_add_category.TabIndex = 3;
+            this.btn_add_category.Text = "+";
+            this.btn_add_category.UseVisualStyleBackColor = true;
+            this.btn_add_category.Click += new System.EventHandler(this.btn_add_category_Click);
+            // 
+            // txt_category
+            // 
+            this.txt_category.Location = new System.Drawing.Point(114, 94);
+            this.txt_category.Name = "txt_category";
+            this.txt_category.Size = new System.Drawing.Size(100, 20);
+            this.txt_category.TabIndex = 2;
+            // 
+            // lbl_add_categories
+            // 
+            this.lbl_add_categories.AutoSize = true;
+            this.lbl_add_categories.Location = new System.Drawing.Point(46, 97);
+            this.lbl_add_categories.Name = "lbl_add_categories";
+            this.lbl_add_categories.Size = new System.Drawing.Size(67, 13);
+            this.lbl_add_categories.TabIndex = 1;
+            this.lbl_add_categories.Text = "Dodaj nową:";
+            // 
+            // lbl_categories_settings
+            // 
+            this.lbl_categories_settings.AutoSize = true;
+            this.lbl_categories_settings.Location = new System.Drawing.Point(46, 71);
+            this.lbl_categories_settings.Name = "lbl_categories_settings";
+            this.lbl_categories_settings.Size = new System.Drawing.Size(52, 13);
+            this.lbl_categories_settings.TabIndex = 0;
+            this.lbl_categories_settings.Text = "Kategorie";
+            // 
             // tab_archive
             // 
+            this.tab_archive.Controls.Add(this.dg_logsView);
             this.tab_archive.Location = new System.Drawing.Point(4, 14);
             this.tab_archive.Margin = new System.Windows.Forms.Padding(2);
             this.tab_archive.Name = "tab_archive";
@@ -335,6 +429,15 @@
             this.tab_archive.TabIndex = 2;
             this.tab_archive.Text = "tab_logs";
             this.tab_archive.UseVisualStyleBackColor = true;
+            // 
+            // dg_logsView
+            // 
+            this.dg_logsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_logsView.Location = new System.Drawing.Point(3, 3);
+            this.dg_logsView.Name = "dg_logsView";
+            this.dg_logsView.Size = new System.Drawing.Size(554, 297);
+            this.dg_logsView.TabIndex = 0;
+            this.dg_logsView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dg_logsView_CellMouseClick);
             // 
             // btn_mainView
             // 
@@ -374,96 +477,6 @@
             this.lbl_item.TabIndex = 11;
             this.lbl_item.Text = "Przedmiot";
             // 
-            // lbl_categories_settings
-            // 
-            this.lbl_categories_settings.AutoSize = true;
-            this.lbl_categories_settings.Location = new System.Drawing.Point(46, 71);
-            this.lbl_categories_settings.Name = "lbl_categories_settings";
-            this.lbl_categories_settings.Size = new System.Drawing.Size(52, 13);
-            this.lbl_categories_settings.TabIndex = 0;
-            this.lbl_categories_settings.Text = "Kategorie";
-            // 
-            // lbl_add_categories
-            // 
-            this.lbl_add_categories.AutoSize = true;
-            this.lbl_add_categories.Location = new System.Drawing.Point(46, 97);
-            this.lbl_add_categories.Name = "lbl_add_categories";
-            this.lbl_add_categories.Size = new System.Drawing.Size(67, 13);
-            this.lbl_add_categories.TabIndex = 1;
-            this.lbl_add_categories.Text = "Dodaj nową:";
-            // 
-            // txt_category
-            // 
-            this.txt_category.Location = new System.Drawing.Point(114, 94);
-            this.txt_category.Name = "txt_category";
-            this.txt_category.Size = new System.Drawing.Size(100, 20);
-            this.txt_category.TabIndex = 2;
-            // 
-            // btn_add_category
-            // 
-            this.btn_add_category.Location = new System.Drawing.Point(220, 94);
-            this.btn_add_category.Name = "btn_add_category";
-            this.btn_add_category.Size = new System.Drawing.Size(28, 23);
-            this.btn_add_category.TabIndex = 3;
-            this.btn_add_category.Text = "+";
-            this.btn_add_category.UseVisualStyleBackColor = true;
-            this.btn_add_category.Click += new System.EventHandler(this.btn_add_category_Click);
-            // 
-            // lbl_categories_list
-            // 
-            this.lbl_categories_list.AutoSize = true;
-            this.lbl_categories_list.Location = new System.Drawing.Point(49, 123);
-            this.lbl_categories_list.Name = "lbl_categories_list";
-            this.lbl_categories_list.Size = new System.Drawing.Size(35, 13);
-            this.lbl_categories_list.TabIndex = 4;
-            this.lbl_categories_list.Text = "label3";
-            this.lbl_categories_list.Click += new System.EventHandler(this.lbl_categories_list_Click);
-            // 
-            // lbl_owners_settings
-            // 
-            this.lbl_owners_settings.AutoSize = true;
-            this.lbl_owners_settings.Location = new System.Drawing.Point(313, 71);
-            this.lbl_owners_settings.Name = "lbl_owners_settings";
-            this.lbl_owners_settings.Size = new System.Drawing.Size(63, 13);
-            this.lbl_owners_settings.TabIndex = 5;
-            this.lbl_owners_settings.Text = "Właściciele";
-            // 
-            // lbl_add_owner
-            // 
-            this.lbl_add_owner.AutoSize = true;
-            this.lbl_add_owner.Location = new System.Drawing.Point(311, 97);
-            this.lbl_add_owner.Name = "lbl_add_owner";
-            this.lbl_add_owner.Size = new System.Drawing.Size(79, 13);
-            this.lbl_add_owner.TabIndex = 6;
-            this.lbl_add_owner.Text = "Dodaj nowego:";
-            // 
-            // lbl_owners_list
-            // 
-            this.lbl_owners_list.AutoSize = true;
-            this.lbl_owners_list.Location = new System.Drawing.Point(313, 123);
-            this.lbl_owners_list.Name = "lbl_owners_list";
-            this.lbl_owners_list.Size = new System.Drawing.Size(35, 13);
-            this.lbl_owners_list.TabIndex = 7;
-            this.lbl_owners_list.Text = "label3";
-            this.lbl_owners_list.Click += new System.EventHandler(this.lbl_owners_list_Click);
-            // 
-            // btn_add_owner
-            // 
-            this.btn_add_owner.Location = new System.Drawing.Point(503, 94);
-            this.btn_add_owner.Name = "btn_add_owner";
-            this.btn_add_owner.Size = new System.Drawing.Size(28, 23);
-            this.btn_add_owner.TabIndex = 8;
-            this.btn_add_owner.Text = "+";
-            this.btn_add_owner.UseVisualStyleBackColor = true;
-            this.btn_add_owner.Click += new System.EventHandler(this.btn_add_owner_Click);
-            // 
-            // txt_add_owner
-            // 
-            this.txt_add_owner.Location = new System.Drawing.Point(397, 94);
-            this.txt_add_owner.Name = "txt_add_owner";
-            this.txt_add_owner.Size = new System.Drawing.Size(100, 20);
-            this.txt_add_owner.TabIndex = 9;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -497,6 +510,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dg_itemsView)).EndInit();
             this.tab_logs.ResumeLayout(false);
             this.tab_logs.PerformLayout();
+            this.tab_archive.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dg_logsView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -540,6 +555,7 @@
         private System.Windows.Forms.Label lbl_owners_list;
         private System.Windows.Forms.Label lbl_add_owner;
         private System.Windows.Forms.Label lbl_owners_settings;
+        private System.Windows.Forms.DataGridView dg_logsView;
     }
 }
 

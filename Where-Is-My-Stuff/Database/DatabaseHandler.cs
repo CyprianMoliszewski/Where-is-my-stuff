@@ -629,6 +629,196 @@ namespace Where_Is_My_Stuff.Database
             }
         }
 
+        ///
+        /// 
+        ///
 
+        ///
+        ///    LOGI
+        ///   
+        public DataSet GetLogs()
+        {
+            DataSet ds = new DataSet();
+            string command = @"SELECT 
+                                    *,
+                                    CASE 
+                                        WHEN can_undo = 1 THEN 'Można przywrócić'
+                                        ELSE 'Nie można przywrócić'
+                                    END AS undo_status
+                                FROM tbl_logs 
+                                ORDER BY log_id DESC";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                using (SqlDataAdapter adapter = new SqlDataAdapter(command, conn))
+                {
+                    adapter.Fill(ds, "LogsTable");
+                }
+            }
+            return ds;
+        }
+        ///
+        /// 
+        ///
+
+        ///
+        ///    LOGI DO ZMIANY
+        ///   
+        public DataTable GetLogsToUndo(int targetLogId)
+        {
+            DataTable dt = new DataTable();
+
+            string query = "SELECT * FROM tbl_logs WHERE log_id >= @targetId AND can_undo = 1 ORDER BY log_id DESC";
+
+            using (SqlConnection conn = new SqlConnection(_conn)) 
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@targetId", targetLogId);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+        ///
+        /// 
+        ///
+
+        ///
+        ///    DATA SET DO COFNIĘCIA ZMIAN
+        ///   
+        public DataSet GetDataSetForLogs()
+        {
+            DataSet ds = new DataSet();
+
+            string query = @"
+                            SELECT * FROM tbl_categories;
+                            SELECT * FROM tbl_owners;
+                            SELECT * FROM tbl_locations;
+                            SELECT * FROM tbl_items;";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
+                {
+                    adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+                    adapter.TableMappings.Add("Table", "tbl_categories");
+                    adapter.TableMappings.Add("Table1", "tbl_owners");
+                    adapter.TableMappings.Add("Table2", "tbl_locations");
+                    adapter.TableMappings.Add("Table3", "tbl_items");
+
+                    adapter.Fill(ds);
+                }
+            }
+            return ds;
+        }
+        ///
+        /// 
+        ///
+
+        ///
+        ///    ZAPISYWANIE ZMIAN W DATA SET
+        ///   
+        public void SaveUndoChanges(DataSet dataSetBase, List<int> undoneLogIds)
+        {
+            DataSet dataSetFinal = new DataSet();
+            if (dataSetBase.HasChanges())
+            {
+                dataSetFinal = dataSetBase.GetChanges();
+                if (dataSetFinal.HasErrors)
+                {
+                    dataSetBase.RejectChanges();
+                    throw new Exception("Wykryto błędy w pamięci DataSet. Zmiany odrzucone.");
+                }
+                else
+                {
+                    using (SqlConnection conn = new SqlConnection(_conn))
+                    {
+                        conn.Open();
+
+                        using (SqlCommand cmd = new SqlCommand("EXEC sp_set_session_context N'IsUndo', 1;", conn))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Usuwanie
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_items"], DataViewRowState.Deleted, conn);
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_locations"], DataViewRowState.Deleted, conn);
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_categories"], DataViewRowState.Deleted, conn);
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_owners"], DataViewRowState.Deleted, conn);
+
+                        // Dodawanie
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_categories"], DataViewRowState.Added, conn);
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_owners"], DataViewRowState.Added, conn);
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_locations"], DataViewRowState.Added, conn);
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_items"], DataViewRowState.Added, conn);
+
+                        // Modyfikacje
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_categories"], DataViewRowState.ModifiedCurrent, conn);
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_owners"], DataViewRowState.ModifiedCurrent, conn);
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_locations"], DataViewRowState.ModifiedCurrent, conn);
+                        UpdateRowsByState(dataSetFinal.Tables["tbl_items"], DataViewRowState.ModifiedCurrent, conn);
+                    }
+                }
+            }
+
+            if (undoneLogIds != null && undoneLogIds.Count > 0)
+            {
+                using (SqlConnection conn = new SqlConnection(_conn))
+                {
+                    conn.Open();
+                    string ids = string.Join(",", undoneLogIds);
+                    string disableQuery = $"UPDATE tbl_logs SET can_undo = 0 WHERE log_id IN ({ids});";
+
+                    using (SqlCommand cmd = new SqlCommand(disableQuery, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    string insertLog = @"
+                                        INSERT INTO tbl_logs (operation_type_id, log_message, tbl_name, can_undo) 
+                                        VALUES (3, 'Cofnięto zmiany z historii operacji', 'System', 0);";
+
+                    using (SqlCommand cmd = new SqlCommand(insertLog, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        private void UpdateRowsByState(DataTable table, DataViewRowState state, SqlConnection conn)
+        {
+            if (table == null) return;
+
+            DataRow[] rows = table.Select("", "", state);
+
+            if (rows.Length > 0)
+            {
+                string pk = table.PrimaryKey.Length > 0 ? table.PrimaryKey[0].ColumnName : table.Columns[0].ColumnName;
+
+                if (state == DataViewRowState.Deleted)
+                {
+                    rows = rows.OrderByDescending(r => r[pk, DataRowVersion.Original]).ToArray();
+                }
+                else if (state == DataViewRowState.Added)
+                {
+                    rows = rows.OrderBy(r => r[pk]).ToArray();
+                }
+
+                using (SqlDataAdapter adapter = new SqlDataAdapter($"SELECT * FROM {table.TableName}", conn))
+                {
+                    adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+                    using (SqlCommandBuilder builder = new SqlCommandBuilder(adapter))
+                    {
+                        adapter.Update(rows);
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,3 +1,7 @@
+INSERT INTO [dbo].[tbl_operation_type] (operation_type_name)
+VALUES ('Delete'), ('Insert'), ('Update'), ('Restore');
+GO
+
 INSERT INTO [dbo].[tbl_categories] (category_name) 
 VALUES ('Buty'), ('Górskie'), ('Narciarskie'), ('Ksi¹¿ki');
 GO
@@ -8,10 +12,6 @@ GO
 
 INSERT INTO [dbo].[tbl_location_type] (location_type_name)
 VALUES ('Pomieszczenie'), ('Szafka'), ('Pude³ko');
-GO
-
-INSERT INTO [dbo].[tbl_operation_type] (operation_type_name)
-VALUES ('Delete'), ('Insert'), ('Update'), ('Restore');
 GO
 
 INSERT INTO [dbo].[tbl_locations] (parent_id, location_type_id, location_name) VALUES
