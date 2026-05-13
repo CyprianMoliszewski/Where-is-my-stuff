@@ -60,8 +60,6 @@ namespace Where_Is_My_Stuff.Services
             var oldDict = string.IsNullOrEmpty(old_value) ? null : JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(old_value);
             var newDict = string.IsNullOrEmpty(new_value) ? null : JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(new_value);
 
-            // --- DYNAMICZNA OBSŁUGA ZMIAN NA DATASET ---
-
             if (op == 1) // 1 - DELETE 
             {
                 DataRow newRow = table.NewRow();

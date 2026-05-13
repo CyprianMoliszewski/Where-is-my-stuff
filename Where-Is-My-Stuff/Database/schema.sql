@@ -127,7 +127,6 @@ BEGIN
             WHEN d.item_id IS NULL THEN CONCAT('Dodano przedmiot: ''', i.item_name, '''')
             WHEN i.item_id IS NULL THEN CONCAT('Usuniêto przedmiot: ''', d.item_name, '''')
             ELSE 
-                -- Jeœli zmieni³a siê sama nazwa przedmiotu
                 CASE 
                     WHEN d.item_name <> i.item_name THEN CONCAT('Zmieniono nazwê przedmiotu z ''', d.item_name, ''' na ''', i.item_name, '''')
                     ELSE CONCAT('Edytowano w³aœciwoœci przedmiotu: ''', i.item_name, '''')

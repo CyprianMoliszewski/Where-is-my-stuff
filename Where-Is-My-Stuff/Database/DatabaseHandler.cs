@@ -558,9 +558,9 @@ namespace Where_Is_My_Stuff.Database
         ///
         /// LOGS START
         ///
-        public DataSet GetLogs()
+        public DataTable GetLogs()
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
             string command = @"SELECT 
                                     *,
                                     CASE 
@@ -574,10 +574,10 @@ namespace Where_Is_My_Stuff.Database
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(command, conn))
                 {
-                    adapter.Fill(ds, "LogsTable");
+                    adapter.Fill(dt);
                 }
             }
-            return ds;
+            return dt;
         }
         public DataTable GetLogsToUndo(int targetLogId)
         {

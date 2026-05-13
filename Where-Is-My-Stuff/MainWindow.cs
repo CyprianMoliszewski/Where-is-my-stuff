@@ -91,8 +91,8 @@ namespace Where_Is_My_Stuff
             }
 
             var dh = DatabaseHandler.Instance;
-            DataSet logs = dh.GetLogs();
-            dg_logsView.DataSource = logs.Tables["LogsTable"];
+            DataTable logs = dh.GetLogs();
+            dg_logsView.DataSource = logs;
                        
             dg_logsView.Columns["log_id"].Visible=false;
             dg_logsView.Columns["operation_type_id"].Visible=false;
@@ -424,9 +424,15 @@ namespace Where_Is_My_Stuff
         private void btn_add_category_Click(object sender, EventArgs e)
         {
             var dh = DatabaseHandler.Instance;
-            dh.AddCategory(txt_category.Text);
-
             List<string> categories = dh.GetCategories();
+
+            if (!string.IsNullOrEmpty(txt_category.Text))
+            {
+                if (!categories.Contains(txt_category.Text)){
+                    dh.AddCategory(txt_category.Text);
+                }                
+            }            
+            categories = dh.GetCategories();
             lbl_categories_list.Text = string.Join("\n", categories);
             txt_category.Clear();
             cb_categories.Items.Clear();
@@ -435,9 +441,15 @@ namespace Where_Is_My_Stuff
         private void btn_add_owner_Click(object sender, EventArgs e)
         {
             var dh = DatabaseHandler.Instance;
-            dh.AddOwner(txt_add_owner.Text);
-
             List<string> owners = dh.GetOwners();
+
+            if (!string.IsNullOrEmpty(txt_add_owner.Text)) 
+            {
+                if (!owners.Contains(txt_add_owner.Text)) {
+                    dh.AddOwner(txt_add_owner.Text);
+                }
+            }          
+            owners = dh.GetOwners();      
             lbl_owners_list.Text = string.Join("\n", owners);
             txt_add_owner.Clear();
             cb_owners.Items.Clear();
@@ -470,6 +482,8 @@ namespace Where_Is_My_Stuff
                     btn_logsView_Click(null, null);
 
                     //Combobox
+                    cb_categories.Items.Clear();
+                    cb_owners.Items.Clear();
                     cb_categories.Items.AddRange(dh.GetValueForCombobox("tbl_categories", "category_name").ToArray());
                     cb_owners.Items.AddRange(dh.GetValueForCombobox("tbl_owners", "owner_name").ToArray());
                     //Settings
