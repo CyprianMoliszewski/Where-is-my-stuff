@@ -49,9 +49,8 @@ namespace Where_Is_My_Stuff
 
         }
 
-
         /// <summary>
-        /// NAV BAR
+        /// NAV BAR START
         /// </summary>
         private void btn_mainView_Click(object sender, EventArgs e)
         {
@@ -106,11 +105,13 @@ namespace Where_Is_My_Stuff
             dg_logsView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             tbc_mainWindow.SelectedIndex = 3;
         }
-
         /// <summary>
-        /// TREE VIEW
+        /// NAV BAR START
         /// </summary>
-        
+        ///
+        /// <summary>
+        /// TREE VIEW START
+        /// </summary>
         private void resfreshTrees()
         {
             TreeViewService treeViewService = new TreeViewService();
@@ -173,11 +174,13 @@ namespace Where_Is_My_Stuff
                 ContextMenuConfig(hitTest.Node);
             }
         }
-
         /// <summary>
-        /// DRAG & DROP
+        /// TREE VIEW END
         /// </summary>
-
+        ///
+        /// <summary>
+        /// DRAG & DROP START
+        /// </summary>
         private void tree_ItemDrag(object sender, ItemDragEventArgs e)
         {
             DoDragDrop(e.Item, DragDropEffects.Move);
@@ -243,7 +246,11 @@ namespace Where_Is_My_Stuff
             return true;
         }
         /// <summary>
-        /// CONEXT MENU
+        /// DRAG & DROP START END
+        /// </summary>
+        /// 
+        /// <summary>
+        /// CONEXT MENU START
         /// </summary>     
         private void ContextMenuConfig(TreeNode node)
         {
@@ -383,7 +390,13 @@ namespace Where_Is_My_Stuff
 
             return result == DialogResult.Yes;
         }
-
+        /// <summary>
+        /// CONEXT MENU END
+        /// </summary>   
+        ///
+        /// <summary>
+        /// ITEMS START
+        /// </summary>
         private void dg_itemsView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -401,11 +414,13 @@ namespace Where_Is_My_Stuff
                                 
             }
         }
-
-        private void lbl_categories_list_Click(object sender, EventArgs e) { }        
-        
-        private void lbl_owners_list_Click(object sender, EventArgs e) { }
-
+        /// <summary>
+        /// ITEMS END
+        /// </summary>
+        ///
+        /// <summary>
+        /// SETTINGS START
+        /// </summary>
         private void btn_add_category_Click(object sender, EventArgs e)
         {
             var dh = DatabaseHandler.Instance;
@@ -417,7 +432,6 @@ namespace Where_Is_My_Stuff
             cb_categories.Items.Clear();
             cb_categories.Items.AddRange(dh.GetValueForCombobox("tbl_categories", "category_name").ToArray());
         }
-
         private void btn_add_owner_Click(object sender, EventArgs e)
         {
             var dh = DatabaseHandler.Instance;
@@ -429,9 +443,16 @@ namespace Where_Is_My_Stuff
             cb_owners.Items.Clear();
             cb_owners.Items.AddRange(dh.GetValueForCombobox("tbl_owners", "owner_name").ToArray());
         }
-
+        /// <summary>
+        /// SETTINGS END
+        /// </summary>
+        ///
+        /// <summary>
+        /// LOGS START
+        /// </summary>
         private void UndoMenu_Click(object sender, EventArgs e)
         {
+            var dh = DatabaseHandler.Instance;
             DialogResult dialogResult = MessageBox.Show(
                 "Czy na pewno chcesz cofnąć tę operację? \n\nJeśli istnieją nowsze powiązane operacje, one również zostaną cofnięte kaskadowo.",
                 "Potwierdzenie cofania",
@@ -447,6 +468,16 @@ namespace Where_Is_My_Stuff
                 {
                     MessageBox.Show("Operacje zostały pomyślnie cofnięte!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btn_logsView_Click(null, null);
+
+                    //Combobox
+                    cb_categories.Items.AddRange(dh.GetValueForCombobox("tbl_categories", "category_name").ToArray());
+                    cb_owners.Items.AddRange(dh.GetValueForCombobox("tbl_owners", "owner_name").ToArray());
+                    //Settings
+                    List<string> categories = dh.GetCategories();
+                    lbl_categories_list.Text = string.Join("\n", categories);
+
+                    List<string> owners = dh.GetOwners();
+                    lbl_owners_list.Text = string.Join("\n", owners);
                 }
                 else
                 {
@@ -455,7 +486,6 @@ namespace Where_Is_My_Stuff
             }
 
         }
-
         private void dg_logsView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right && e.RowIndex >= 0)
@@ -473,6 +503,9 @@ namespace Where_Is_My_Stuff
                 }
             }
         }
+        /// <summary>
+        /// LOGS END
+        /// </summary>
     }
 }
    

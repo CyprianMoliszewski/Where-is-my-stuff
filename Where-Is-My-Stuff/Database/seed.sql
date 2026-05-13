@@ -35,5 +35,5 @@ INSERT INTO [dbo].[tbl_items] (location_id, category_id, owner_id, item_name, it
 GO
 
 INSERT INTO [dbo].[tbl_logs] (operation_type_id, log_message, tbl_name, old_value, new_value, can_undo) VALUES 
-(2, 'Za³adowanie bazy danych', 'Database', NULL, NULL, 0);
+(2, 'Za³adowanie bazy danych przyk³adowymi danymi', 'Database', NULL, NULL, 0);
 GO

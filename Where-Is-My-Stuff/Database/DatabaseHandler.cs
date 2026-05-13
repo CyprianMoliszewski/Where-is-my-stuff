@@ -28,37 +28,9 @@ namespace Where_Is_My_Stuff.Database
         {
             _conn = connString;
         }
-        /// <summary>
-        /// EXECUTING COMMAND / DRY RULE
-        /// </summary>
-        /// <param name="command"></param>
-        private void ExecuteSqlCommand(string command)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(_conn))
-                {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand(command, conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                Debug.WriteLine("COMMAND" + command  + "EXECUTED");
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-            }
-        }
-
-        private void AddLog(string operationType, string message, string oldValue, string newValue) { }
-
-
-
 
         ///
-        /// TREE VIEW
+        /// TREE VIEW START
         ///
         public List<TreeNodeLocation> GetAllLocationsForTreeView()
         {
@@ -134,67 +106,13 @@ namespace Where_Is_My_Stuff.Database
 
             return items;
         }
-        public void DeleteItem(int id)
-        {
-            string command = "UPDATE tbl_items SET is_active = 0 WHERE item_id = @id";
-
-            using (SqlConnection conn = new SqlConnection(_conn))
-            {
-                SqlCommand cmd = new SqlCommand(command, conn);
-                cmd.Parameters.AddWithValue("@id", id);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
-        }
-        public void DeleteLocation(int id)
-        {
-            string command = @"
-                WITH RecursiveCTE AS (
-                    SELECT location_id 
-                    FROM tbl_locations 
-                    WHERE location_id = @id
-            
-                    UNION ALL
-            
-                    SELECT t.location_id 
-                    FROM tbl_locations t 
-                    INNER JOIN RecursiveCTE rc ON t.parent_id = rc.location_id
-                )
-                SELECT location_id INTO #TempIDs FROM RecursiveCTE;
-
-                UPDATE tbl_locations 
-                SET is_active = 0 
-                WHERE location_id IN (SELECT location_id FROM #TempIDs);
-
-                UPDATE tbl_items 
-                SET is_active = 0 
-                WHERE location_id IN (SELECT location_id FROM #TempIDs);
-
-                DROP TABLE #TempIDs;";
-
-            using (SqlConnection conn = new SqlConnection(_conn))
-            {
-                conn.Open();
-                using (SqlTransaction trans = conn.BeginTransaction())
-                {
-                    using (SqlCommand cmd = new SqlCommand(command, conn, trans))
-                    {
-                        cmd.Parameters.AddWithValue("@id", id);
-                        cmd.ExecuteNonQuery();
-                        trans.Commit();
-                    }
-                }
-            }
-        }
+        /// 
+        /// TREE VIEW END
         ///
         /// 
         ///
-
+        /// DRAG & DROP START
         ///
-        /// DRAG & DROP
-        ///
-
         public void MoveLocation(int locationId, int newParentId)
         {
             string query = "UPDATE tbl_locations SET parent_id = @newParentId WHERE location_id = @id";
@@ -211,7 +129,6 @@ namespace Where_Is_My_Stuff.Database
                 }
             }
         }
-
         public void MoveItem(int itemId, int newLocationId)
         {
             string query = "UPDATE tbl_items SET location_id = @newLocationId WHERE item_id = @id";
@@ -229,12 +146,13 @@ namespace Where_Is_My_Stuff.Database
             }
         }
         ///
+        /// DRAG & DROP END
         ///
         ///
-
         ///
-        /// LOCATION
+        /// CONTEXT MENU (ADD/EDIT/DELETE) ITEMS AND LOCATIONS | START
         /// 
+        /// LOCATIONS
         public void AddLocation(string locationName, string typeName, int parentId)
         {
             string command = @"INSERT INTO tbl_locations (location_name, location_type_id, parent_id) 
@@ -282,14 +200,47 @@ namespace Where_Is_My_Stuff.Database
                 cmd.ExecuteNonQuery();
             }
         }
+        public void DeleteLocation(int id)
+        {
+            string command = @"
+                WITH RecursiveCTE AS (
+                    SELECT location_id 
+                    FROM tbl_locations 
+                    WHERE location_id = @id
+            
+                    UNION ALL
+            
+                    SELECT t.location_id 
+                    FROM tbl_locations t 
+                    INNER JOIN RecursiveCTE rc ON t.parent_id = rc.location_id
+                )
+                SELECT location_id INTO #TempIDs FROM RecursiveCTE;
 
-        /// 
-        /// 
-        /// 
+                UPDATE tbl_locations 
+                SET is_active = 0 
+                WHERE location_id IN (SELECT location_id FROM #TempIDs);
 
-        ///
-        /// ITEM
-        /// 
+                UPDATE tbl_items 
+                SET is_active = 0 
+                WHERE location_id IN (SELECT location_id FROM #TempIDs);
+
+                DROP TABLE #TempIDs;";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
+                {
+                    using (SqlCommand cmd = new SqlCommand(command, conn, trans))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.ExecuteNonQuery();
+                        trans.Commit();
+                    }
+                }
+            }
+        }
+        /// ITEMS
         public void AddItem(int locationId, string categoryName, string ownerName, string itemName, string description)
         {
             string command = @"INSERT INTO tbl_items (location_id, category_id, owner_id, item_name, item_description) 
@@ -336,12 +287,25 @@ namespace Where_Is_My_Stuff.Database
                 cmd.ExecuteNonQuery();
             }
         }
-        /// 
-        /// 
-        /// 
+        public void DeleteItem(int id)
+        {
+            string command = "UPDATE tbl_items SET is_active = 0 WHERE item_id = @id";
 
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                SqlCommand cmd = new SqlCommand(command, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
         ///
-        /// GET ITEM LOCATION PATH
+        /// CONTEXT MENU (ADD/EDIT/DELETE) ITEMS AND LOCATIONS | END
+        ///  
+        ///
+        ///
+        /// UTILS START
         /// 
         public string GetLocationPath(int id, string itemName)
         {
@@ -396,16 +360,6 @@ namespace Where_Is_My_Stuff.Database
 
             return fullPath;
         }
-
-        /// 
-        /// 
-        /// 
-        
-
-        ///
-        /// COMBOBOX
-        ///
-
         public List<string> GetValueForCombobox(string table_name, string field_name)
         {
             List<string> value = new List<string>();
@@ -492,13 +446,88 @@ namespace Where_Is_My_Stuff.Database
             }
             return typeName;
         }
+        public List<string> GetCategories()
+        {
+            List<string> category = new List<string>();
 
-        ///
-        /// 
-        ///
+            string command = "SELECT category_name from tbl_categories";
 
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                SqlCommand cmd = new SqlCommand(command, conn);
+                conn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        string name = reader.GetString(reader.GetOrdinal("category_name"));
+                        category.Add(name);
+                    }
+                }
+            }
+            return category;
+        }
+        public List<string> GetOwners()
+        {
+            List<string> owner = new List<string>();
+
+            string command = "SELECT owner_name from tbl_owners";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                SqlCommand cmd = new SqlCommand(command, conn);
+                conn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        string name = reader.GetString(reader.GetOrdinal("owner_name"));
+                        owner.Add(name);
+                    }
+                }
+            }
+            return owner;
+        }
+        public void AddCategory(string category)
+        {
+            string command = "INSERT INTO tbl_categories (category_name) VALUES (@category_name)";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                SqlCommand cmd = new SqlCommand(command, conn);               
+
+                cmd.Parameters.AddWithValue("@category_name", category);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }            
+        }
+        public void AddOwner(string category)
+        {
+            string command = "INSERT INTO tbl_owners (owner_name) VALUES (@owner_name)";
+
+            using (SqlConnection conn = new SqlConnection(_conn))
+            {
+                SqlCommand cmd = new SqlCommand(command, conn);
+
+                cmd.Parameters.AddWithValue("@owner_name", category);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
         ///
-        ///    GET ITEMS
+        /// UTILS END
+        ///
+        ///
+        ///
+        /// ITEMS START
         ///
         public DataTable GetItmes()
         {
@@ -523,119 +552,12 @@ namespace Where_Is_My_Stuff.Database
             return dt;
         }
         ///
-        /// 
+        /// ITEMS END
         ///
-
         ///
-        ///    GET ALL CATEGORIES
         ///
-        public List<string> GetCategories()
-        {
-            List<string> category = new List<string>();
-
-            string command = "SELECT category_name from tbl_categories";
-
-            using (SqlConnection conn = new SqlConnection(_conn))
-            {
-                SqlCommand cmd = new SqlCommand(command, conn);
-                conn.Open();
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-
-                        string name = reader.GetString(reader.GetOrdinal("category_name"));
-                        category.Add(name);
-                    }
-                }
-            }
-            return category;
-        }
+        /// LOGS START
         ///
-        /// 
-        ///
-
-        ///
-        ///    GET ALL COWNERS
-        ///
-        public List<string> GetOwners()
-        {
-            List<string> owner = new List<string>();
-
-            string command = "SELECT owner_name from tbl_owners";
-
-            using (SqlConnection conn = new SqlConnection(_conn))
-            {
-                SqlCommand cmd = new SqlCommand(command, conn);
-                conn.Open();
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-
-                        string name = reader.GetString(reader.GetOrdinal("owner_name"));
-                        owner.Add(name);
-                    }
-                }
-            }
-            return owner;
-        }
-
-        ///
-        /// 
-        ///
-
-        ///
-        ///    ADD NEW CATEGORY
-        ///   
-        public void AddCategory(string category)
-        {
-            string command = "INSERT INTO tbl_categories (category_name) VALUES (@category_name)";
-
-            using (SqlConnection conn = new SqlConnection(_conn))
-            {
-                SqlCommand cmd = new SqlCommand(command, conn);               
-
-                cmd.Parameters.AddWithValue("@category_name", category);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
-            }            
-        }
-
-        ///
-        /// 
-        ///
-
-        ///
-        ///    ADD NEW OWNER
-        ///   
-        public void AddOwner(string category)
-        {
-            string command = "INSERT INTO tbl_owners (owner_name) VALUES (@owner_name)";
-
-            using (SqlConnection conn = new SqlConnection(_conn))
-            {
-                SqlCommand cmd = new SqlCommand(command, conn);
-
-                cmd.Parameters.AddWithValue("@owner_name", category);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
-            }
-        }
-
-        ///
-        /// 
-        ///
-
-        ///
-        ///    LOGI
-        ///   
         public DataSet GetLogs()
         {
             DataSet ds = new DataSet();
@@ -657,13 +579,6 @@ namespace Where_Is_My_Stuff.Database
             }
             return ds;
         }
-        ///
-        /// 
-        ///
-
-        ///
-        ///    LOGI DO ZMIANY
-        ///   
         public DataTable GetLogsToUndo(int targetLogId)
         {
             DataTable dt = new DataTable();
@@ -683,14 +598,7 @@ namespace Where_Is_My_Stuff.Database
                 }
             }
             return dt;
-        }
-        ///
-        /// 
-        ///
-
-        ///
-        ///    DATA SET DO COFNIĘCIA ZMIAN
-        ///   
+        } 
         public DataSet GetDataSetForLogs()
         {
             DataSet ds = new DataSet();
@@ -716,13 +624,6 @@ namespace Where_Is_My_Stuff.Database
             }
             return ds;
         }
-        ///
-        /// 
-        ///
-
-        ///
-        ///    ZAPISYWANIE ZMIAN W DATA SET
-        ///   
         public void SaveUndoChanges(DataSet dataSetBase, List<int> undoneLogIds)
         {
             DataSet dataSetFinal = new DataSet();
@@ -790,7 +691,6 @@ namespace Where_Is_My_Stuff.Database
                 }
             }
         }
-
         private void UpdateRowsByState(DataTable table, DataViewRowState state, SqlConnection conn)
         {
             if (table == null) return;
@@ -820,5 +720,9 @@ namespace Where_Is_My_Stuff.Database
                 }
             }
         }
+        ///
+        /// LOGS END
+        ///
+
     }
 }

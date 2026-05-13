@@ -36,7 +36,7 @@ namespace Where_Is_My_Stuff.Database
         /// <summary>
         /// TO CHANGE DATASOURCE (LOCAL/SQLSERVER) COMMENT/UNCOMMENT LINES BELOW:
         /// SQL SERVER:
-        /// COMMENT LINE 46 AND 51 | KEEP LINE 50 UNCOMMENT!
+        /// COMMENT LINE 46 AND 51 | KEEP LINE 52 UNCOMMENT!
         /// LOCAL DATABASE (.MDF):
         /// COMMENT LINE 52 | KEEP LINE 51 AND 46 UNCOMMENT!
         /// </summary>
