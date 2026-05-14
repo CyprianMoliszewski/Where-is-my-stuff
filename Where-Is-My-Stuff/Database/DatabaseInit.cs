@@ -31,7 +31,7 @@ namespace Where_Is_My_Stuff.Database
         /// <summary>
         /// CONNECTION STRING FOR DATABASE ON SQL SERVER
         /// </summary>
-        private static readonly string _connStringWimsSqlServer = @"Server=.\SQLEXPRESS; Database=WIMS; Trusted_Connection=True; TrustServerCertificate=True;";
+        private static readonly string _connStringWimsSqlServer = @"YOUR CONNECTION STING TO DB SERVER";
 
         /// <summary>
         /// TO CHANGE DATASOURCE (LOCAL/SQLSERVER) COMMENT/UNCOMMENT LINES BELOW:
